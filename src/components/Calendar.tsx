@@ -66,7 +66,7 @@ const Calendar = ({ events, selectedDate, people }: CalendarProps) => {
           >
             <div className="person-avatar">
               {person.avatar ? (
-                <img src={person.avatar} alt={person.name} />
+                <img src={import.meta.env.BASE_URL + person.avatar} alt={person.name} />
               ) : (
                 <i className="fas fa-user"></i>
               )}

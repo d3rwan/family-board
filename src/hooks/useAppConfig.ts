@@ -23,25 +23,25 @@ const STORAGE_KEY = "appConfig";
 const defaultConfig: AppConfig = {
   people: [
     {
-      name: "Papa",
+      name: "John",
       color: "#A8E6CF",
       avatar: "/avatars/dad.png",
       calendarId: "",
     },
     {
-      name: "Maman",
+      name: "Jane",
       color: "#B8E0F6",
       avatar: "/avatars/mom.png",
       calendarId: "",
     },
     {
-      name: "Baptiste",
+      name: "Adam",
       color: "#FFD3B6",
       avatar: "/avatars/son.png",
       calendarId: "",
     },
     {
-      name: "Héloïse",
+      name: "Eve",
       color: "#",
       avatar: "/avatars/daughter.png",
       calendarId: "",

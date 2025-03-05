@@ -33,7 +33,7 @@ jobs:
         run: npm install
 
       - name: Build project
-        run: npm run build
+        run: npm run build:gh-pages
 
       - name: Upload build files
         uses: actions/upload-pages-artifact@v3

@@ -293,7 +293,7 @@ function App() {
               <p>Connectez-vous avec Google pour accéder à vos calendriers</p>
               <button onClick={initiateAuth} className="google-auth-button">
                 <img
-                  src="/google-logo.svg"
+                  src="family-board/google-logo.svg"
                   alt="Google"
                   className="google-logo"
                 />
