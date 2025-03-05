@@ -1,0 +1,701 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+#root {
+  text-align: center;
+}
+
+/* App Layout */
+.app-container {
+  min-height: 100vh;
+  padding: 1rem;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0 auto;
+}
+
+.top-row {
+  display: inline-flex;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.bottom-row {
+  display: inline-flex;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1rem;
+}
+
+/* Clock Component */
+.clock-container {
+  padding: 1rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.time {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+}
+
+.date {
+  font-size: 1rem;
+  color: #e0e0e0;
+  text-transform: capitalize;
+}
+
+/* Calendar Component */
+.calendar-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  backdrop-filter: blur(10px);
+  color: white;
+  overflow-x: auto;
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.calendar-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: white;
+  font-weight: 500;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  color: white;
+  transition: all 0.2s;
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.calendar-title {
+  margin: 0 0 1rem 0;
+  font-size: 1rem;
+  color: white;
+}
+
+.calendar-content {
+  display: grid;
+  grid-template-columns: 100px repeat(4, 1fr);
+  gap: 0.5rem;
+  min-width: 800px;
+}
+
+.timeline {
+  display: flow;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 4rem;
+}
+
+.time-marker {
+  height: 60px;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+.person-schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.person-name {
+  height: 40px;
+  margin: 0;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: #2C3E50;
+  font-weight: 600;
+  text-shadow: none;
+}
+
+.person-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-right: 10px;
+}
+
+.person-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.person-avatar i {
+  font-size: 1.2rem;
+  color: #2C3E50;
+}
+
+.events-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+  min-height: 720px; /* 12 hours * 60px */
+}
+
+.event-item {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #2C3E50;
+  text-shadow: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  border-top-style: groove;
+  border-top-color: #2a5298;
+  border-bottom-style: solid;
+  border-bottom-color: #2a5298;
+}
+
+.event-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.event-date {
+  margin-top: 0.25rem;
+  font-weight: 400;
+  opacity: 0.8;
+  display: inline-flex;
+  align-content: space-between;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.event-title {
+  margin-top: 0.25rem;
+  text-overflow: ellipsis;
+  font-weight: 500;
+  display: inline-flex;
+  align-content: space-between;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Weather Component */
+.weather-container {
+  position: relative;
+  width: 100%;
+  border-radius: 1rem;
+  overflow: hidden;
+  color: white;
+}
+
+.weather-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 0;
+}
+
+.weather-background-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(3px);
+}
+
+.weather-content-wrapper {
+  position: relative;
+  z-index: 1;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.weather-main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.weather-icon-temp {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.weather-icon {
+  font-size: 4rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+}
+
+.temperature {
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1;
+  background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0.8));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+.description {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+}
+
+.weather-details {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  height: 100%;
+  justify-content: flex-start;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  backdrop-filter: blur(5px);
+  min-width: 150px;
+}
+
+.detail-icon {
+  font-size: 1.5rem;
+}
+
+.detail-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-value {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.detail-label {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+/* Configuration Modal */
+.config-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+.config-content {
+  background: rgba(30, 41, 59, 0.95);
+  padding: 2rem;
+  border-radius: 1rem;
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.config-content h2 {
+  margin: 0 0 1.5rem 0;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.person-config-item {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.person-config-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.person-config-header h3 {
+  margin: 0;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.remove-button {
+  background: none;
+  border: none;
+  color: #ff4444;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.2s;
+}
+
+.remove-button:hover {
+  color: #ff6666;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #2196F3;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.form-group input[type="color"] {
+  height: 40px;
+  padding: 0.25rem;
+}
+
+.config-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  gap: 1rem;
+}
+
+.add-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.add-button:hover {
+  background-color: #45a049;
+}
+
+.save-cancel {
+  display: flex;
+  gap: 1rem;
+}
+
+.save-button, .cancel-button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.save-button {
+  background-color: #2196F3;
+  color: white;
+  border: none;
+}
+
+.save-button:hover {
+  background-color: #1976D2;
+}
+
+.cancel-button {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cancel-button:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.config-button {
+  background-color: rgba(33, 150, 243, 0.2);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  transition: all 0.2s;
+  backdrop-filter: blur(5px);
+}
+
+.config-button:hover {
+  background-color: rgba(33, 150, 243, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Scrollbar styles for the config modal */
+.config-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.config-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.config-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.config-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Authentication styles */
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 0 auto;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.auth-container h2 {
+  margin-bottom: 1rem;
+  color: white;
+  font-size: 2rem;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.auth-container p {
+  margin-bottom: 2.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.google-auth-button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 24px;
+  background-color: white;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #3c4043;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.google-auth-button:hover {
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+  border-color: #dadce0;
+}
+
+.google-auth-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.google-logo {
+  width: 18px;
+  height: 18px;
+}
+
+.config-section {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.config-section h3 {
+  margin: 0 0 1rem 0;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.config-section .form-group {
+  margin-bottom: 1rem;
+}
+
+.config-section .form-group:last-child {
+  margin-bottom: 0;
+}
+
+.config-section input[type="password"] {
+  font-family: monospace;
+  letter-spacing: 0.1em;
+} 
