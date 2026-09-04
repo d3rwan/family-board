@@ -29,6 +29,8 @@ The configuration can be modified through the user interface by clicking the ⚙
 
 ## Installation
 
+Use Node 22 (see `.nvmrc`, e.g. `nvm use`).
+
 1. Clone the repository:
    ```bash
    git clone https://github.com/your-username/family-board.git
