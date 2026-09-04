@@ -45,6 +45,14 @@ The configuration can be modified through the user interface by clicking the ⚙
    npm run dev
    ```
 
+## Scripts
+
+- `npm run dev` — Starts the Vite development server with hot reload; use it for local development.
+- `npm run build` — Type-checks with TypeScript and creates a production build; use it before deploying.
+- `npm run build:gh-pages` — Type-checks and builds with the `/family-board` base path; use it when deploying to GitHub Pages.
+- `npm run lint` — Runs ESLint over the project; use it to check code style and catch issues.
+- `npm run preview` — Serves the production build locally for preview; use it to verify the build output.
+
 ## Google Calendar Setup
 
 1. Go to the [Google Cloud Console](https://console.cloud.google.com/)
