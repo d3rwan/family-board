@@ -6,6 +6,9 @@
 npm install
 ```
 
+## Tests
+No test script is currently declared in `package.json`.
+
 ## Run the app locally
 
 ```bash
@@ -23,6 +26,3 @@ npm run preview
 ```bash
 npm run lint
 ```
-
-## Tests
-No test script is currently declared in `package.json`.
