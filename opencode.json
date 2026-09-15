@@ -1,0 +1,13 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "notion": {
+      "type": "remote",
+      "url": "https://patient-sticks-keyboard-tue.trycloudflare.com/internal/mcp/r_c2bffb90/notion",
+      "headers": {
+        "authorization": "Bearer 16eae961b37a446dbe01e3af5eb05272"
+      },
+      "enabled": true
+    }
+  }
+}
