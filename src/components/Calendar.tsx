@@ -10,6 +10,8 @@ interface Event {
   end: Date;
   person: string;
   color: string;
+  source?: "google" | "activity";
+  location?: string;
 }
 
 interface CalendarProps {
@@ -84,7 +86,9 @@ const Calendar = ({ events, selectedDate, people }: CalendarProps) => {
                 return (
                   <div
                     key={event.id}
-                    className="event-item"
+                    className={`event-item${
+                      event.source === "activity" ? " activity-event" : ""
+                    }`}
                     style={{
                       top: position.top,
                       height: position.height,
@@ -92,12 +96,27 @@ const Calendar = ({ events, selectedDate, people }: CalendarProps) => {
                       borderLeft: `4px solid ${event.color}`,
                       boxShadow: `0 2px 4px ${event.color}80`,
                     }}
+                    title={
+                      event.source === "activity"
+                        ? `Activité hebdo${event.location ? ` · ${event.location}` : ""}`
+                        : undefined
+                    }
                   >
                     <div className="event-date">
                       {format(new Date(event.start), "HH:mm", { locale: fr })} -{" "}
                       {format(new Date(event.end), "HH:mm", { locale: fr })}
                     </div>
-                    <div className="event-title">{event.title}</div>
+                    <div className="event-title">
+                      {event.title}
+                      {event.source === "activity" && (
+                        <span className="event-badge">hebdo</span>
+                      )}
+                      {event.location && (
+                        <span className="event-location">
+                          📍 {event.location}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 );
               })}

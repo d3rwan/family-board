@@ -698,4 +698,126 @@ button:focus-visible {
 .config-section input[type="password"] {
   font-family: monospace;
   letter-spacing: 0.1em;
+}
+
+/* Activities feature */
+.calendar-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.activity-button {
+  background: rgba(76, 175, 80, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.activity-button:hover {
+  background: rgba(76, 175, 80, 0.4);
+  transform: translateY(-1px);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+  font-size: 1rem;
+}
+
+.form-group select option {
+  color: #213547;
+}
+
+.activities-hint {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  margin: 0 0 1rem 0;
+}
+
+.activities-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  padding: 0.6rem 0.8rem;
+}
+
+.activity-icon {
+  font-size: 1.3rem;
+}
+
+.activity-text {
+  flex: 1;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.activity-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: #64b5f6;
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.6rem;
+}
+
+.link-button:hover {
+  color: #90caf9;
+  border-color: transparent;
+}
+
+.event-item.activity-event {
+  border-top-style: dashed;
+  border-bottom-style: dashed;
+}
+
+.event-badge {
+  display: inline-block;
+  margin-left: 0.4rem;
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.18);
+  font-size: 0.7rem;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+.event-location {
+  display: block;
+  font-size: 0.75rem;
+  opacity: 0.85;
 } 

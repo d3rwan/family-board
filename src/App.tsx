@@ -1,9 +1,11 @@
 import { addDays, endOfDay, format, startOfDay, subDays } from "date-fns";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import ActivitiesModal from "./components/ActivitiesModal";
 import AppConfig from "./components/AppConfig";
 import Calendar from "./components/Calendar";
 import Clock from "./components/Clock";
 import Weather from "./components/Weather";
+import { useActivities, ACTIVITY_KINDS, activityToDate } from "./hooks/useActivities";
 import { useAppConfig } from "./hooks/useAppConfig";
 import "./styles/global.css";
 import { fr } from "date-fns/locale";
@@ -15,6 +17,9 @@ export interface CalendarEvent {
   end: Date;
   person: string;
   color: string;
+  source?: "google" | "activity";
+  kind?: string;
+  location?: string;
 }
 
 interface GoogleCalendarEvent {
@@ -47,7 +52,10 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [showConfig, setShowConfig] = useState(false);
+  const [showActivities, setShowActivities] = useState(false);
   const { config, updateConfig } = useAppConfig();
+  const { activities, addActivity, updateActivity, removeActivity } =
+    useActivities();
 
   const fetchEvents = useCallback(
     async (
@@ -276,6 +284,35 @@ function App() {
     setSelectedDate(newDate);
   };
 
+  const activityEvents: CalendarEvent[] = useMemo(() => {
+    const dayOfWeek = selectedDate.getDay();
+    return activities
+      .filter((activity) => activity.dayOfWeek === dayOfWeek)
+      .map((activity) => {
+        const { start, end } = activityToDate(activity, selectedDate);
+        const person = config.people.find((p) => p.name === activity.person);
+        const icon =
+          ACTIVITY_KINDS[activity.kind]?.icon ?? "";
+        return {
+          id: `activity-${activity.id}`,
+          title: `${icon} ${activity.title}`.trim(),
+          start,
+          end,
+          person: activity.person,
+          color: person?.color ?? "#E0E0E0",
+          source: "activity" as const,
+          kind: activity.kind,
+          location: activity.location,
+        };
+      });
+  }, [activities, selectedDate, config.people]);
+
+  const displayedEvents = useMemo(() => {
+    const merged = [...events, ...activityEvents];
+    merged.sort((a, b) => a.start.getTime() - b.start.getTime());
+    return merged;
+  }, [events, activityEvents]);
+
   return (
     <div className="app-container">
       <div className="dashboard">
@@ -309,12 +346,20 @@ function App() {
                   ←
                 </button>
                 <h2>{format(selectedDate, "EEEE d MMMM", { locale: fr })}</h2>
-                <button onClick={handleNextDay} className="nav-button">
-                  →
-                </button>
+                <div className="calendar-header-actions">
+                  <button
+                    onClick={() => setShowActivities(true)}
+                    className="activity-button"
+                  >
+                    ⚽ + Activité
+                  </button>
+                  <button onClick={handleNextDay} className="nav-button">
+                    →
+                  </button>
+                </div>
               </div>
               <Calendar
-                events={events}
+                events={displayedEvents}
                 selectedDate={selectedDate}
                 people={config.people}
               />
@@ -328,6 +373,16 @@ function App() {
           currentEnv={config.env}
           onSave={updateConfig}
           onClose={() => setShowConfig(false)}
+        />
+      )}
+      {showActivities && (
+        <ActivitiesModal
+          people={config.people}
+          activities={activities}
+          onAdd={addActivity}
+          onUpdate={updateActivity}
+          onRemove={removeActivity}
+          onClose={() => setShowActivities(false)}
         />
       )}
     </div>
